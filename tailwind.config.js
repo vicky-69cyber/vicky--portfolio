@@ -1,0 +1,77 @@
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: ['./index.html', './src/**/*.{js,jsx}'],
+  theme: {
+    extend: {
+      colors: {
+        bg:      '#faf8f5',
+        bg2:     '#f4f0ea',
+        bg3:     '#ede8e0',
+        card:    '#ffffff',
+        accent:  '#e8440a',
+        accent2: '#ff6b35',
+        ink:     '#1a1612',
+        ink2:    '#3d3830',
+        ink3:    '#6b6560',
+      },
+      fontFamily: {
+        sans: ['Outfit', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        hand: ['Caveat', 'cursive'],
+      },
+      fontSize: {
+        clamp1: 'clamp(52px, 10vw, 110px)',
+        clamp2: 'clamp(32px, 4vw, 52px)',
+        clamp3: 'clamp(36px, 5vw, 68px)',
+        clamp4: 'clamp(36px, 6vw, 72px)',
+      },
+      boxShadow: {
+        accent: '0 4px 20px rgba(232,68,10,0.12)',
+        'accent-lg': '0 8px 32px rgba(232,68,10,0.12)',
+        card: '0 4px 24px rgba(0,0,0,0.08)',
+        'card-lg': '0 20px 60px rgba(0,0,0,0.10)',
+      },
+      animation: {
+        marquee:      'marquee 26s linear infinite',
+        ticker:       'ticker 30s linear infinite',
+        'spin-slow':  'spin-slow 22s linear infinite',
+        'spin-slow-r':'spin-slow 14s linear infinite reverse',
+        'float-badge':'float-badge 3s ease-in-out infinite',
+        'pulse-g':    'pulse-g 2s ease infinite',
+        wave:         'wave 2.4s ease infinite',
+        'draw-line':  'draw-line 1s ease 0.8s forwards',
+        'jjk-pulse':  'jjk-pulse 3s ease-in-out infinite',
+        'su1': 'slideUp 0.5s ease 0.1s both',
+        'su2': 'slideUp 0.6s ease 0.2s both',
+        'su3': 'slideUp 0.5s ease 0.3s both',
+        'su4': 'slideUp 0.6s ease 0.35s both',
+        'su5': 'slideUp 0.6s ease 0.45s both',
+        'su6': 'slideUp 0.6s ease 0.55s both',
+        'su-v': 'slideUp 0.7s ease 0.15s both',
+      },
+      keyframes: {
+        marquee:      { to: { transform: 'translateX(-50%)' } },
+        ticker:       { to: { transform: 'translateX(-50%)' } },
+        'spin-slow':  { to: { transform: 'rotate(360deg)' } },
+        'float-badge':{ '0%,100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-6px)' } },
+        'pulse-g':    { '0%,100%': { opacity: '1' }, '50%': { opacity: '0.4' } },
+        wave: {
+          '0%,60%,100%': { transform: 'rotate(0)' },
+          '10%,30%':     { transform: 'rotate(18deg)' },
+          '20%':          { transform: 'rotate(-8deg)' },
+          '40%':          { transform: 'rotate(14deg)' },
+          '50%':          { transform: 'rotate(-4deg)' },
+        },
+        'draw-line': { to: { strokeDashoffset: '0' } },
+        slideUp: {
+          from: { opacity: '0', transform: 'translateY(28px)' },
+          to:   { opacity: '1', transform: 'translateY(0)' },
+        },
+        'jjk-pulse': {
+          '0%,100%': { filter: 'drop-shadow(0 0 14px rgba(168,85,247,0.8))' },
+          '50%':      { filter: 'drop-shadow(0 0 26px rgba(168,85,247,1))' },
+        },
+      },
+    },
+  },
+  plugins: [],
+}

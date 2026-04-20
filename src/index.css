@@ -1,0 +1,220 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── BASE ── */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+  }
+  body {
+    overflow-x: hidden;
+    cursor: none;
+  }
+  img { max-width: 100%; height: auto; display: block; }
+  a, button, select { cursor: none; -webkit-tap-highlight-color: transparent; }
+  picture { display: block; }
+
+  /* Paper texture overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0.6;
+  }
+
+  :focus-visible {
+    outline: 2px solid #e8440a;
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+}
+
+/* ── GLOBAL COMPONENTS ── */
+@layer components {
+  .skip-link {
+    position: absolute;
+    top: -100%;
+    left: 16px;
+    z-index: 99999;
+    background: #e8440a;
+    color: #fff;
+    padding: 10px 18px;
+    border-radius: 0 0 8px 8px;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: top 0.2s;
+  }
+  .skip-link:focus { top: 0; }
+
+  /* Scroll reveal */
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.65s ease, transform 0.65s ease;
+  }
+  .reveal.visible { opacity: 1; transform: none; }
+  .delay-1 { transition-delay: 0.1s; }
+  .delay-2 { transition-delay: 0.2s; }
+  .delay-3 { transition-delay: 0.3s; }
+  .delay-4 { transition-delay: 0.4s; }
+
+  /* Process step reveal */
+  .process-step {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s cubic-bezier(0.22,1,0.36,1), transform 0.5s cubic-bezier(0.22,1,0.36,1);
+    will-change: opacity, transform;
+  }
+  .process-step.visible { opacity: 1; transform: translateY(0); }
+  .process-step:nth-child(1) { transition-delay: 0.05s; }
+  .process-step:nth-child(2) { transition-delay: 0.15s; }
+  .process-step:nth-child(3) { transition-delay: 0.25s; }
+  .process-step:nth-child(4) { transition-delay: 0.35s; }
+
+  /* Back to top */
+  .back-top {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(12px);
+    transition: opacity 0.3s, visibility 0.3s, transform 0.3s, background 0.2s;
+  }
+  .back-top.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  /* Nav active link */
+  .nav-active { color: #e8440a !important; }
+
+  /* Hero photo rings (pseudo-elements) */
+  .photo-ring {
+    position: relative;
+  }
+  .photo-ring::before {
+    content: '';
+    position: absolute;
+    inset: -12px;
+    border-radius: 50% 46% 52% 48%;
+    border: 2px dashed rgba(232,68,10,0.2);
+    animation: spin-slow 22s linear infinite;
+    pointer-events: none;
+  }
+  .photo-ring::after {
+    content: '';
+    position: absolute;
+    inset: -6px;
+    border-radius: 50% 42% 56% 44%;
+    border: 1.5px solid rgba(232,68,10,0.1);
+    animation: spin-slow 14s linear infinite reverse;
+    pointer-events: none;
+  }
+
+  /* Hero SVG underline */
+  .hero-underline path {
+    stroke: #e8440a;
+    stroke-width: 3;
+    fill: none;
+    stroke-dasharray: 300;
+    stroke-dashoffset: 300;
+    animation: draw-line 1s ease 0.8s forwards;
+    opacity: 0.35;
+  }
+
+  /* Btn shimmer effect */
+  .btn-shimmer::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+    transform: translateX(-100%);
+    transition: transform 0.5s ease;
+  }
+  .btn-shimmer:hover::before { transform: translateX(100%); }
+
+  /* Marquee pause on hover */
+  .pause-hover:hover { animation-play-state: paused; }
+
+  /* Stack pill shimmer */
+  .s-pill::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, #e8440a, #ff6b35);
+    opacity: 0;
+    transition: opacity 0.25s;
+    border-radius: 100px;
+  }
+  .s-pill:hover::before { opacity: 1; }
+
+  /* Pill inner above overlay */
+  .s-pill-inner { position: relative; z-index: 1; }
+
+  /* Process section noise */
+  .process-noise::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    opacity: 0.5;
+  }
+
+  /* CTA box noise */
+  .cta-noise::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    opacity: 0.5;
+  }
+
+  /* Service card border line */
+  .srv-line::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; width: 4px; bottom: 0;
+    background: linear-gradient(180deg, #e8440a, #ff6b35);
+    transform: scaleY(0);
+    transform-origin: bottom;
+    transition: transform 0.35s ease;
+    border-radius: 0 0 0 20px;
+  }
+  .srv-line:hover::before { transform: scaleY(1); }
+
+  /* Proof box bottom line */
+  .proof-line::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, #e8440a, #ff6b35);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease;
+  }
+  .proof-line:hover::after { transform: scaleX(1); }
+
+  /* Typewriter cursor */
+  .tw-caret { border-right: 2px solid #e8440a; }
+}
+
+/* ── MOBILE: reset cursor ── */
+@media (max-width: 767px) {
+  body, a, button, select { cursor: auto !important; }
+}
+
+/* ── REDUCED MOTION ── */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
